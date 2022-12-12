@@ -1,10 +1,11 @@
-from retriever.indexing.es_client import ES
-from retriever.indexing.create_index import create_index
 import json
-from tqdm import tqdm
-from utils.util import clean,remove_title, split_paragraph
-from multiprocessing import Manager,Pool
 import logging
+from multiprocessing import Manager, Pool
+
+from tqdm import tqdm
+
+from retriever import ES, create_index
+from utils.utils import clean, remove_title, split_paragraph
 
 logger = logging.getLogger()
 logger.setLevel(logging.WARNING)
@@ -16,6 +17,7 @@ logger.addHandler(console)
 host = "localhost"
 port = "9200"
 index_name = "paragraph"
+
 
 def create_data(index):
     global lines

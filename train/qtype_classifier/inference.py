@@ -1,11 +1,7 @@
-# -*- coding: utf-8 -*-
-# import jamspell
-import json
-from transformers import AutoModelForSequenceClassification,AutoTokenizer,pipeline
-import torch
-import math
-
 import numpy as np
+import torch
+from transformers import (AutoModelForSequenceClassification, AutoTokenizer,
+                          pipeline)
 
 
 class Classify:

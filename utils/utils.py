@@ -1,12 +1,13 @@
 import json
-import regex as re
-import unicodedata
-import pickle as pkl
 import os
-import pkgutil
+import pickle as pkl
+import string
+import unicodedata
+
 import lxml.html
 import lxml.html.clean
-import string
+import regex as re
+
 
 def _json_loader(path):
     with open(path,'r') as f:

@@ -1,11 +1,13 @@
---extra-index-url https://download.pytorch.org/whl/cu116
+torch==1.12.0
+# --extra-index-url https://download.pytorch.org/whl/cu116
 
 transformers
-torch==1.12.0+cu116
+# torch==1.12.0+cu116
 configparse
 prettytable
 
 vncorenlp
+pandas
 elasticsearch==7.13
 scikit-learn
 wandb

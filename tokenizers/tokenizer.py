@@ -97,7 +97,7 @@ class Tokens(object):
 
 class Tokenizer(object):
     """Base tokenizer class.
-    Tokenizers implement tokenize, which should return a Tokens class.
+    tokenizer implement tokenize, which should return a Tokens class.
     """
     def tokenize(self, text):
         raise NotImplementedError

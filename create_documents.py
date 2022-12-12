@@ -1,10 +1,8 @@
-from retriever.indexing.es_client import ES
-from retriever.indexing.create_index import create_index
 import json
-from tqdm import tqdm
-from utils.util import clean,write_file,remove_title, clean_entity, split_paragraph
-from multiprocessing import Manager,Pool
 import logging
+from multiprocessing import Pool
+
+from retriever import ES, create_index
 
 logger = logging.getLogger()
 logger.setLevel(logging.WARNING)
@@ -17,23 +15,15 @@ host = "localhost"
 port = "9200"
 index_name = "wikipedia"
 
+
 def create_data(line):
     doc = json.loads(line)
     text = doc['text']
-    text_split = text.split()
     sentences = text.split(". ")
     if len(sentences) >1 and "định hướng" not in doc:
-        
-        # if len(text_split) > max_words:
-        #     main_content = " ".join(text_split[:max_words])
-        # else:
-        #     main_content = text
-        # main_content = clean(main_content)
         tmp = {}
         tmp['id'] = doc['id']
-        # main_content = remove_title(main_content,doc['title'])
         tmp['title'] = doc['title']
-        # tmp['text'] = main_content
         return tmp
 
 if __name__ == "__main__":

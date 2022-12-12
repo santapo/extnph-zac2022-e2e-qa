@@ -5,10 +5,8 @@
 # This source code is licensed under the license found in the
 # LICENSE file in the root directory of this source tree.
 
-import os
-
 DEFAULTS = {
-    'corenlp_classpath': "VnCoreNLP"
+    'corenlp_classpath': "data"
 }
 
 def set_default(key, value):
@@ -19,16 +17,12 @@ def set_default(key, value):
 from .corenlp_tokenizer import CoreNLPTokenizer
 from .simple_tokenizer import SimpleTokenizer
 
-
-
-def get_class(name):
+def get_tokenizer(name):
     if name == 'corenlp':
-        return CoreNLPTokenizer
+        return CoreNLPTokenizer()
     if name == 'simple':
-        return SimpleTokenizer
-
+        return SimpleTokenizer()
     raise RuntimeError('Invalid tokenizer: %s' % name)
-
 
 def get_annotators_for_args(args):
     annotators = set()
@@ -39,7 +33,6 @@ def get_annotators_for_args(args):
     if args.use_ner:
         annotators.add('ner')
     return annotators
-
 
 def get_annotators_for_model(model):
     return get_annotators_for_args(model.args)

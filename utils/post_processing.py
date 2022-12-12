@@ -1,7 +1,7 @@
 import re
+from transformers import AutoModelForSequenceClassification, AutoTokenizer, pipeline
 
-from transformers import (AutoModelForSequenceClassification, AutoTokenizer,
-                          pipeline)
+from .utils import *
 
 META_QUESTION_CLASSES = {
     "full_date": "date",
@@ -200,3 +200,19 @@ def get_question_class_by_model(classifier, question):
     if label == 'LABEL_0':    return ('wiki', score)
     elif label == 'LABEL_1':  return ('undetected_date', score)
     elif label == 'LABEL_2':  return ('number', score)
+
+def correct_answers(es, orginal_question, answers, classifier, mapper):
+    answers = remove_all_punc(answers)
+    answers = answers.strip()
+    answers = mapper.get(answers,answers)
+    question_class = get_question_class(orginal_question, classifier)
+    meta_question_class = get_meta_question_class(question_class)
+    if meta_question_class == "number":
+        matches = re.findall("(\d+)", answers)
+        answers = matches[0] if bool(matches) else "null"
+    elif meta_question_class == "date":
+        answers = format_date(answers, question_class)
+    elif meta_question_class == "wiki":
+        answers = es.query_title(answers)
+        answers = "wiki/" + answers.replace(" ","_")
+    return answers

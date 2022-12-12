@@ -10,10 +10,13 @@ Serves commands to a java subprocess running the jar. Requires java 8.
 
 import copy
 import os
+
 from vncorenlp import VnCoreNLP
-from scripts.utils.util import normalize_accent
-from .tokenizer import Tokens, Tokenizer
+
+from utils.utils import normalize_accent
+
 from . import DEFAULTS
+from .tokenizer import Tokenizer, Tokens
 
 
 def remove_punc(word,accept_punc = [',','.']):
@@ -32,14 +35,13 @@ class CoreNLPTokenizer(Tokenizer):
             classpath: Path to the corenlp directory of jars
             mem: Java heap memory
         """
-        self.classpath = (kwargs.get('classpath') or
-                          DEFAULTS['corenlp_classpath'])
+        self.classpath = (kwargs.get('classpath') or DEFAULTS['corenlp_classpath'])
         # self.classpath = "/data/truongnx/zalo_ai/VnCoreNLP"
-        self.vncore_path = os.path.join(self.classpath,"VnCoreNLP-1.1.1.jar")
+        self.vncore_path = os.path.join(self.classpath, "VnCoreNLP-1.1.1.jar")
         self.annotators = copy.deepcopy(kwargs.get('annotators', set(['wseg','pos'])))
         self.annotators = ",".join(self.annotators)
         self.mem = kwargs.get('mem', '4g')
-        self.corenlp = VnCoreNLP(self.vncore_path,annotators=self.annotators, max_heap_size='-Xmx'+self.mem)
+        self.corenlp = VnCoreNLP(self.vncore_path, annotators=self.annotators, max_heap_size='-Xmx'+self.mem)
 
     def join_token(self,tokens_dict:list,join_pos = ['Np']):
         res = [tokens_dict]

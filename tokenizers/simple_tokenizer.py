@@ -8,9 +8,10 @@
 non-whitespace tokens.
 """
 
-import re
 import logging
-from .tokenizer import Tokens, Tokenizer
+import re
+
+from .tokenizer import Tokenizer, Tokens
 
 logger = logging.getLogger(__name__)
 

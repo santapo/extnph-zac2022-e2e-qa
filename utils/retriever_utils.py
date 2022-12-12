@@ -6,13 +6,15 @@
 # LICENSE file in the root directory of this source tree.
 """Various retriever utilities."""
 
-import regex as re
 import unicodedata
+
 import numpy as np
+import regex as re
 import scipy.sparse as sp
 from sklearn.utils import murmurhash3_32
-from scripts.utils.util import stopwords
-import hashlib
+
+from utils.utils import stopwords
+
 # ------------------------------------------------------------------------------
 # Sparse matrix saving/loading helpers.
 # ------------------------------------------------------------------------------

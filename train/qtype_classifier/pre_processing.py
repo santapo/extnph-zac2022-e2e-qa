@@ -1,11 +1,8 @@
-from utils import *
 import pandas as pd
-import json
-import numpy
-import re
 from tqdm import tqdm
-from scripts.utils.util import clean,read_file
 
+from utils import *
+from utils.utils import clean, read_file
 
 if __name__ == "__main__":
     s_date_kw = ["ngày tháng năm","ngày","ngày tháng","năm","tháng","thế kỷ"]

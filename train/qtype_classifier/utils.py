@@ -1,7 +1,7 @@
 import json
-import torch
 import re
-import unicodedata
+
+import torch
 
 acronym = {"oà":"òa","oá":"óa","oạ":"ọa","oả":"ỏa","oã":"õa",
                 "uỳ":"ùy","uý":"úy","uỷ":"ủy","uỵ":"ụy","uỹ":"ũy"}
@@ -11,6 +11,7 @@ teen = {'ko': 'không','k': 'không', 'a': 'anh', 'e': 'em', 'bít': 'biết', '
     'đc': 'được', 't': 'tôi', 'Ko': 'Không', 'A': 'Anh', 'E': 'Em', 'Bít': 'Biết', 
     'H': 'Giờ', 'J': 'Gì', 'Mún': 'Muốn', 'Hok': 'Học', 'Iu': 'Yêu', 'Ck': 'Ch', 'Vk': 'Vợ', 'Ô': 'Ông', 
     'Đc': 'Được', 'T': 'Tôi', 'f': 'ph', 'tk': 'th', 'nk': 'nh', 'F': 'Ph', 'Tk': 'Th', 'Nk': 'Nh'}
+
 
 def load_vocab():
     with open('./vocab.json','r') as f:

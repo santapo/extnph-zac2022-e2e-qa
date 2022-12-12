@@ -1,6 +1,7 @@
 from elasticsearch import Elasticsearch
 from elasticsearch.helpers import bulk
 
+
 class ES:
     def __init__(self,host,port,index_name):
         self.es = Elasticsearch(host+":"+port)
@@ -161,6 +162,7 @@ class ES:
         else:
             texts = response["hits"]["hits"][0]['_source']['title']
             return texts
+
 
 if __name__ == "__main__":
     query = "Việt Nam"

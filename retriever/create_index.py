@@ -1,8 +1,6 @@
-import json
 from elasticsearch import Elasticsearch
-from elasticsearch.helpers import bulk
-INDEX_FILE = {
 
+INDEX_FILE = {
         "settings": {
         "number_of_shards": 1,
         "number_of_replicas": 1
@@ -33,7 +31,6 @@ def create_index(host, port, index_name):
     client = Elasticsearch(":".join([host,port]))
     client.indices.delete(index=index_name, ignore=[404])
     client.indices.create(index=index_name, body=INDEX_FILE)
-
 
 
 if __name__ == "__main__":
