@@ -1,0 +1,20 @@
+{   
+    "ngày tháng năm nào":"full_date",
+    "ngày bao nhiêu": "full_date",
+    "ngày tháng nào":"date",
+    "ngày nào": "full_date",
+    "ngày mấy": "full_date",
+    "năm bao nhiêu": "year",
+    "năm nào": "year",
+    "năm mấy": "year",
+    "tháng bao nhiêu": "month",
+    "tháng nào": "month",
+    "tháng mấy": "month",
+    "khi nào": "",
+    "thời gian nào": "",
+    "thế kỷ nào": "",
+    "bao giờ": "",
+    "bao nhiêu": "number",
+    "mấy": "number"
+
+}
