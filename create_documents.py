@@ -1,3 +1,4 @@
+import argparse
 import json
 import logging
 from multiprocessing import Pool
@@ -11,9 +12,6 @@ console = logging.StreamHandler()
 console.setFormatter(fmt)
 logger.addHandler(console)
 
-host = "localhost"
-port = "9200"
-index_name = "wikipedia"
 
 
 def create_data(line):
@@ -27,16 +25,30 @@ def create_data(line):
         return tmp
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--host", help="Elasticsearch host", default="localhost")
+    parser.add_argument("--port", help="Elasticsearch port", default="9200")
+    parser.add_argument("--index", help="Elasticsearch index", default="wikipedia")
+    parser.add_argument("--data_path", help="Wikidump path", default="./data/wikipedia_20220620_cleaned.jsonl")
+    parser.add_argument("--num_pool", help="Number of processors to use", default=5)
+    args = parser.parse_args()
+
+    host = args.host
+    port = args.port
+    index_name = args.index
+    data_path = args.data_path
+    num_pool = args.num_pool
+
     logger.warning("Creating index {} to {}:{}".format(index_name, host, port))
     create_index(host, port, index_name)
     data = []
     count = 0
-    lines = open("./data/wikipedia_20220620_cleaned.jsonl",'r').readlines()
+    lines = open(data_path,'r').readlines()
     es = ES(host,port,index_name)
     max_words = 10000
 
-    workers = Pool(10)
-    step = max(int(len(lines) / 10), 1)
+    workers = Pool(num_pool)
+    step = max(int(len(lines) / num_pool), 1)
     batches = [lines[i:i + step] for i in range(0, len(lines), step)]
     for i, batch in enumerate(batches):
         logger.warning('-' * 25 + 'Batch %d/%d' % (i + 1, len(batches)) + '-' * 25)
